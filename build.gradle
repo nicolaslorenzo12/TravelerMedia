@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.6'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+description = 'TravelerBackend'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Web API support
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // JPA (includes jakarta.persistence annotations)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // In-memory database for easy demos
+    runtimeOnly 'com.h2database:h2'
+
+    // DevTools (optional but nice for auto-reload)
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
