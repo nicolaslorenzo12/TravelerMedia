@@ -1,7 +1,7 @@
 package com.example.travelerbackend.controller;
 
 import com.example.travelerbackend.dto.TravelerPhotoDTO;
-import com.example.travelerbackend.model.Traveler;
+import com.example.travelerbackend.model.Photo;
 import com.example.travelerbackend.service.TravelerService;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +14,9 @@ import java.util.List;
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
 public class TravelerController {
-
+    
     private final TravelerService travelerService;
+
 
     public TravelerController(TravelerService travelerService) {
         this.travelerService = travelerService;
@@ -31,17 +32,17 @@ public class TravelerController {
      */
     @PostMapping("/photo")
     public ResponseEntity<String> uploadPhoto(@RequestParam("file") MultipartFile file) throws IOException {
-        String photoUrl = travelerService.uploadPhoto(file);
-        return ResponseEntity.ok(photoUrl);
+        travelerService.uploadPhoto(file);
+        return ResponseEntity.ok("Photo uploaded successfully");
     }
 
     @GetMapping("/photo/{id}")
     public ResponseEntity<byte[]> getPhoto(@PathVariable Long id) {
-        Traveler traveler = travelerService.getTravelerPhoto(id);
+        Photo traveler = travelerService.getTravelerPhoto(id);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType(traveler.getPhotoType()));
-        return new ResponseEntity<>(traveler.getPhoto(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(traveler.getPhotoBytes(), headers, HttpStatus.OK);
     }
 
     @GetMapping("/photos")

@@ -4,14 +4,14 @@ package com.example.travelerbackend.model;
 import jakarta.persistence.*;
 
 @Entity
-public class Traveler {
+public class Photo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Lob
-    private byte[] photo;
+    private byte[] photoBytes;
 
     private String photoType;
 
@@ -19,12 +19,12 @@ public class Traveler {
         return id;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public byte[] getPhotoBytes() {
+        return photoBytes;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
+    public void setPhotoBytes(byte[] photo) {
+        this.photoBytes = photo;
     }
 
     public String getPhotoType() {
@@ -34,6 +34,5 @@ public class Traveler {
     public void setPhotoType(String photoType) {
         this.photoType = photoType;
     }
-
 
 }
