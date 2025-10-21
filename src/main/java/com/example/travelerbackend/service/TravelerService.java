@@ -1,10 +1,10 @@
 package com.example.travelerbackend.service;
 
+
 import com.example.travelerbackend.model.Traveler;
 import com.example.travelerbackend.repository.TravelerRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class TravelerService {
 
     public Traveler getTravelerPhoto(Long id) {
         return travelerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Traveler not found"));
+                .orElseThrow(() -> new RuntimeException("Photo not found"));
     }
 
     public List<Traveler> getAllTravelers() {
