@@ -1,6 +1,6 @@
 package com.example.travelerbackend.service;
 
-import com.example.travelerbackend.dto.TravelerPhotoDTO;
+import com.example.travelerbackend.dto.PhotoDto;
 import com.example.travelerbackend.model.Photo;
 import com.example.travelerbackend.repository.TravelerRepository;
 import org.springframework.stereotype.Service;
@@ -36,20 +36,16 @@ public class TravelerService {
         travelerRepository.save(traveler);
     }
 
-    public Photo getTravelerPhoto(Long id) {
-        return travelerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Photo not found"));
-    }
-
-    public List<TravelerPhotoDTO> getAllTravelerPhotos() {
+    public List<PhotoDto> getAllTravelerPhotos() {
         return travelerRepository.findAll()
                 .stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
-    private TravelerPhotoDTO convertToDTO(Photo traveler) {
-        String base64Image = Base64.getEncoder().encodeToString(traveler.getPhotoBytes());
-        return new TravelerPhotoDTO(traveler.getId(), base64Image, traveler.getPhotoType());
+    private PhotoDto convertToDTO(Photo photo) {
+        String dataUrl = "data:" + photo.getPhotoType() + ";base64," +
+                Base64.getEncoder().encodeToString(photo.getPhotoBytes());
+        return new PhotoDto(dataUrl);
     }
 }

@@ -46,7 +46,7 @@ function displayGallery(photos) {
     galleryContainer.innerHTML = '';
     photos.forEach(photo => {
         const img = document.createElement('img');
-        img.src = `${serverUrl}/api/photo/${photo.id}`;
+        img.src = photo.dataUrl;
         img.alt = "Uploaded photo";
         img.className = "gallery-photo";
         galleryContainer.appendChild(img);
